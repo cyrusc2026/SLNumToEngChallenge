@@ -2,17 +2,33 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Input a number from 0 to 999");
-        Scanner scanner = new Scanner(System.in);
-        int input = scanner.nextInt();
-        //only takes integers
-        System.out.println(numToEng(input));
+        while(true) {
+            System.out.println("Input a number from 0 to 999");
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.next();
+            // Check if the input is an integer string
+            char[] numbers = {'0','1','2','3','4','5','6','7','8','9'};
+            for (int i = 0; i < input.length(); i++) {
+                boolean charCheck = false;
+                for (int j = 0; j<10; j++) {
+                    if (input.charAt(i) == (numbers[j])) {
+                        charCheck = true;
+                        //checks if actually integer in the string
+                        break;
+                        //saves time
+                    }
+                }
+                if (!charCheck) throw new Error("This is not a number!");
+            }
+            if (Integer.parseInt(input) > 999 || Integer.parseInt(input) < 0){
+                throw new Error("Your number doesn't fit within in the parameters!");
+                //checks if user can read
+            }
+            //only takes integers
+            System.out.println(numToEng(Integer.parseInt(input)));
+        }
     }
     public static String numToEng(int num){
-        if (num > 999 || num < 0){
-            System.out.println("Your number doesn't fit within in the parameters");
-            System.exit(13);
-        }
         String answer = "";
         String[] units = {"zero","one","two","three","four","five","six","seven","eight","nine"};
         //index = number represented
